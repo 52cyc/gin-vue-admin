@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/plugin/email"
+	sms "github.com/flipped-aurora/gin-vue-admin/server/plugin/tencent_sms"
 	"github.com/flipped-aurora/gin-vue-admin/server/utils/plugin"
 	"github.com/gin-gonic/gin"
 )
@@ -30,5 +31,6 @@ func bizPluginV1(group ...*gin.RouterGroup) {
 		global.GVA_CONFIG.Email.Port,
 		global.GVA_CONFIG.Email.IsSSL,
 	))
+	PluginInit(public, sms.CreateTencentSmsPlug("短信的SecretId", "短信的SecretKey", "短信的 SdkAppId", "短信的 SignName"))
 	holder(public, private)
 }
